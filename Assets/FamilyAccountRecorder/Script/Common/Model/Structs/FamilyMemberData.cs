@@ -1,4 +1,4 @@
-namespace FamilyAccountRecorder.Common.Model
+namespace FamilyAccountRecorder.Common.Model.Structs
 {
     /// <summary>
     /// 表示用户权限的枚举
@@ -6,13 +6,15 @@ namespace FamilyAccountRecorder.Common.Model
     public enum AthorityType : int
     {
         /// <summary> 创建人 </summary>
-        Originator,
+        Owner,
         /// <summary> 管理员 </summary>
         Administrator,
         /// <summary> 普通用户 </summary>
         User,
         /// <summary> 只读访客 </summary>
         Guest,
+        /// <summary> 交易对象主体 </summary>
+        BillTarget,
     }
 
     /// <summary>
@@ -26,6 +28,8 @@ namespace FamilyAccountRecorder.Common.Model
         Male,
         /// <summary> 女性 </summary>
         Female,
+        /// <summary> 集体组织 </summary>
+        Group,
         /// <summary> 其他性别 </summary>
         Others,
     }
@@ -33,6 +37,7 @@ namespace FamilyAccountRecorder.Common.Model
     /// <summary>
     /// 表示用户的基本数据
     /// </summary>
+    [System.Serializable]
     public struct FamilyMemberData
     {
         public string uid;

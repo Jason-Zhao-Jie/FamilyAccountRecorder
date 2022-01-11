@@ -1,4 +1,4 @@
-﻿namespace FamilyAccountRecorder.Common.Model
+﻿namespace FamilyAccountRecorder.Common.Model.Structs
 {
     /// <summary>
     /// 代表资金出入源类型的枚举
@@ -24,6 +24,7 @@
     /// <summary>
     /// 代表资金出入源基础的数据
     /// </summary>
+    [System.Serializable]
     public struct PocketModalData
     {
         public string uid;
@@ -31,8 +32,10 @@
         public PocketType type;
         /// <summary> 名称 </summary>
         public string name;
-        /// <summary> 组织，一半用于分类，例如支付宝钱包、余额宝、花呗以及借呗同属支付宝组织 </summary>
+        /// <summary> 组织 </summary>
         public string organization;
+        /// <summary> 标签 <seealso cref="PocketTagData.uid"/> </summary>
+        public string[] tags;
         /// <summary> 能否充值 </summary>
         public bool canChargeIn;
         /// <summary> 能否支付 </summary>
