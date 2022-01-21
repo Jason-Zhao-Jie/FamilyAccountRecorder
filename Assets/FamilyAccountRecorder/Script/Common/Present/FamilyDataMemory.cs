@@ -1,10 +1,15 @@
+using FamilyAccountRecorder.Common.Interface;
 using FamilyAccountRecorder.Common.Model.Structs;
-using FamilyAccountRecorder.Common.Model.Utility;
+using FamilyAccountRecorder.Common.Utility;
 
-namespace FamilyAccountRecorder.Common.Model
+namespace FamilyAccountRecorder.Common.Present
 {
-    public class FamilyModel
+    /// <summary>
+    /// 代表家庭账户全部数据的内存模型
+    /// </summary>
+    public class FamilyDataMemory : IFamilyData
     {
+        public virtual DataSource DataSource => DataSource.Memory;
         public FamilySettingData FamilySetting
         {
             get

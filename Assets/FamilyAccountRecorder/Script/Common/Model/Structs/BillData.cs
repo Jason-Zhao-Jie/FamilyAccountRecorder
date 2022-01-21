@@ -116,6 +116,10 @@
         public long value;
         /// <summary> 账单发生时间 </summary>
         public long dateTime;
+        /// <summary> 账单生效金额（分） </summary>
+        public long enabledValue;
+        /// <summary> 账单生效时间 </summary>
+        public long enabledDateTime;
         /// <summary> 账单描述 </summary>
         public string info;
         /// <summary> 账单备注 </summary>

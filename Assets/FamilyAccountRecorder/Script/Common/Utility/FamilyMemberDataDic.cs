@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 using FamilyAccountRecorder.Common.Model.Structs;
 
-namespace FamilyAccountRecorder.Common.Model.Utility
+namespace FamilyAccountRecorder.Common.Utility
 {
     public class FamilyMemberDataDic : DataDic<string, FamilyMemberData>
     {

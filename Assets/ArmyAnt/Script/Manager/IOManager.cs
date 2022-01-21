@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ArmyAnt.Manager {
 
@@ -84,11 +85,11 @@ namespace ArmyAnt.Manager {
         }
 
         private static string ParsePath(string[] path) {
-            string filename = UnityEngine.Application.persistentDataPath;
+            StringBuilder filename = new StringBuilder(UnityEngine.Application.persistentDataPath);
             for (var i = 0; i < path.Length; ++i) {
-                filename += System.IO.Path.AltDirectorySeparatorChar + path[i];
+                filename.Append(System.IO.Path.AltDirectorySeparatorChar).Append(path[i]);
             }
-            return filename;
+            return filename.ToString();
         }
 
         public static UnityEngine.Networking.UnityWebRequest HttpGet(string url) {

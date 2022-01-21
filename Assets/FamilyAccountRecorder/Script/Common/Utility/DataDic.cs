@@ -1,4 +1,4 @@
-namespace FamilyAccountRecorder.Common.Model.Utility
+namespace FamilyAccountRecorder.Common.Utility
 {
     public class DataDic<K, V> : System.Collections.Generic.Dictionary<K, V> where V : struct
     {
