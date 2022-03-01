@@ -4,7 +4,7 @@ using ArmyAnt.Manager;
 namespace FamilyAccountRecorder.Utility
 {
     /// <summary>
-    /// ÓÃÓÚ±£´æ±¾µØÊı¾İµÄ Json ÎÄ¼ş½Ó¿Ú
+    /// ç”¨äºä¿å­˜æœ¬åœ°æ•°æ®çš„ Json æ–‡ä»¶æ¥å£
     /// </summary>
     public class JsonDataDicHelper
     {

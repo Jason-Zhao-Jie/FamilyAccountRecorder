@@ -5,7 +5,7 @@ using FamilyAccountRecorder.Common.Utility;
 namespace FamilyAccountRecorder.Common.Present
 {
     /// <summary>
-    /// ´ú±í¼ÒÍ¥ÕË»§È«²¿Êı¾İµÄÄÚ´æÄ£ĞÍ
+    /// ä»£è¡¨å®¶åº­è´¦æˆ·å…¨éƒ¨æ•°æ®çš„å†…å­˜æ¨¡å‹
     /// </summary>
     public class FamilyDataMemory : IFamilyData
     {
