@@ -11,7 +11,7 @@
         Income,
         /// <summary> 支出 </summary>
         Expend,
-        /// <summary> 转移 </summary>
+        /// <summary> 内部转移 </summary>
         MoveOver,
 
         /// <summary> 特殊账单 </summary>
@@ -29,10 +29,12 @@
         Dealer,
         /// <summary> 利息收入 </summary>
         Interests,
+        /// <summary> 还入本金 </summary>
+        RepaymentIn,
         /// <summary> 转入 </summary>
         MoveIn,
-        /// <summary> 贷款到账 </summary>
-        Borrow,
+        /// <summary> 借入 </summary>
+        BorrowIn,
 
 
         /// <summary> 其他收入 </summary>
@@ -54,6 +56,8 @@
         RepaymentCapitalAndInterests,
         /// <summary> 转出 </summary>
         MoveOut,
+        /// <summary> 借出 </summary>
+        BorrowOut,
 
         /// <summary> 其他支出 </summary>
         Others = 99999999,
