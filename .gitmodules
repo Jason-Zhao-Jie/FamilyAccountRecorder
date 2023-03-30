@@ -1,0 +1,6 @@
+[submodule "Assets/ArmyAnt.Net"]
+	path = Assets/ArmyAnt.Net
+	url = https://github.com/Army-Ant/ArmyAnt.Net.git
+[submodule "Assets/ArmyAntUnity"]
+	path = Assets/ArmyAntUnity
+	url = https://github.com/Army-Ant/ArmyAntUnity.git
