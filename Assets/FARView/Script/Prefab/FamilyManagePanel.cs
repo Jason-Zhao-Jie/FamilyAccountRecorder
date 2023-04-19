@@ -20,9 +20,12 @@ namespace FamilyAccountRecorder.View.Prefab
 
         protected void Awake()
         {
-            var drop = Center.SelectedDrop;
             dropdown_familySelect.ClearOptions();
             var flist = new List<string>();
+            foreach(var i in CoreCenter.FamilyList)
+            {
+                flist.Add(i);
+            }
             dropdown_familySelect.AddOptions(flist);
         }
 
@@ -53,7 +56,7 @@ namespace FamilyAccountRecorder.View.Prefab
 
         public void OnClickChangeTarget()
         {
-            Center.EventMgr.Notify(Event.ShowPanel, PanelType.DropSelect, PanelLayer.Popup);
+            ViewCenter.EventMgr.Notify(Event.ShowPanel, PanelType.DropSelect, PanelLayer.Popup);
         }
 
         public void OnClickSwitchTo()

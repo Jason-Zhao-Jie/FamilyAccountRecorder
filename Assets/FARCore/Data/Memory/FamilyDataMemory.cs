@@ -9,6 +9,13 @@ namespace FamilyAccountRecorder.Data.Memory
     /// </summary>
     public class FamilyDataMemory : IFamilyData
     {
+        public FamilyDataMemory(IFamilyManager manager, string name)
+        {
+            this.manager = manager;
+            this.name = name;
+            familySetting.name = name;
+        }
+
         public FamilySettingData FamilySetting
         {
             get
@@ -160,6 +167,9 @@ namespace FamilyAccountRecorder.Data.Memory
             }
             return ret;
         }
+
+        protected readonly string name;
+        protected IFamilyManager manager;
 
         private FamilySettingData familySetting;
 

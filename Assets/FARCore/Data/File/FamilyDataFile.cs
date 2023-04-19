@@ -18,10 +18,9 @@ namespace FamilyAccountRecorder.Data.File
         const string KEY_BILL_TAGS = "billTags.json";
         const string KEY_BILLS = "bills.json";
 
-        public FamilyDataFile(IFamilyManager manager, string name)
+        public FamilyDataFile(IFamilyManager manager, string name):base(manager, name)
         {
-            this.manager = manager;
-            this.name = name;
+            UpdateSave(true);
             UpdateLoad();
         }
 
@@ -68,81 +67,100 @@ namespace FamilyAccountRecorder.Data.File
                 SetBills(bills.bills);
             }
         }
-        public void UpdateSave()
+        public void UpdateSave(bool onlyCheckFree = false)
         {
             IOManager.MkdirIfNotExist(FileSource.DROP_ROOT, name);
             // FamilySettingData
-            helper.UpdateSave(FamilySetting, FileSource.DROP_ROOT, name, KEY_FAMILY_SETTING);
+            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_FAMILY_SETTING))
+            {
+                helper.UpdateSave(FamilySetting, FileSource.DROP_ROOT, name, KEY_FAMILY_SETTING);
+            }
             // FamilyMemberData
-            var familyMemberIds = GetAllFamilyMembers();
-            var familyMembers = new FamilyMembersSave
+            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_FAMILY_MEMBERS))
             {
-                members = new FamilyMemberData[familyMemberIds.Length]
-            };
-            for(int i=0;i<familyMemberIds.Length;++i)
-            {
-                familyMembers.members[i] = GetFamilyMember(familyMemberIds[i]);
+                var familyMemberIds = GetAllFamilyMembers();
+                var familyMembers = new FamilyMembersSave
+                {
+                    members = new FamilyMemberData[familyMemberIds.Length]
+                };
+                for (int i = 0; i < familyMemberIds.Length; ++i)
+                {
+                    familyMembers.members[i] = GetFamilyMember(familyMemberIds[i]);
+                }
+                helper.UpdateSave(familyMembers, FileSource.DROP_ROOT, name, KEY_FAMILY_MEMBERS);
             }
-            helper.UpdateSave(familyMembers, FileSource.DROP_ROOT, name, KEY_FAMILY_MEMBERS);
             // PocketTagData
-            var pocketTagIds = GetAllPocketTags();
-            var pocketTags = new PocketTagsSave
+            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_POCKET_TAGS))
             {
-                tags = new PocketTagData[pocketTagIds.Length]
-            };
-            for (int i = 0; i < pocketTagIds.Length; ++i)
-            {
-                pocketTags.tags[i] = GetPocketTag(pocketTagIds[i]);
+                var pocketTagIds = GetAllPocketTags();
+                var pocketTags = new PocketTagsSave
+                {
+                    tags = new PocketTagData[pocketTagIds.Length]
+                };
+                for (int i = 0; i < pocketTagIds.Length; ++i)
+                {
+                    pocketTags.tags[i] = GetPocketTag(pocketTagIds[i]);
+                }
+                helper.UpdateSave(pocketTags, FileSource.DROP_ROOT, name, KEY_POCKET_TAGS);
             }
-            helper.UpdateSave(pocketTags, FileSource.DROP_ROOT, name, KEY_POCKET_TAGS);
             // PocketModalData
-            var pocketModalIds = GetAllPocketModals();
-            var pocketModals = new PocketModalsSave
+            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_POCKET_MODALS))
             {
-                modals = new PocketModalData[pocketModalIds.Length]
-            };
-            for (int i = 0; i < pocketModalIds.Length; ++i)
-            {
-                pocketModals.modals[i] = GetPocketModal(pocketModalIds[i]);
+                var pocketModalIds = GetAllPocketModals();
+                var pocketModals = new PocketModalsSave
+                {
+                    modals = new PocketModalData[pocketModalIds.Length]
+                };
+                for (int i = 0; i < pocketModalIds.Length; ++i)
+                {
+                    pocketModals.modals[i] = GetPocketModal(pocketModalIds[i]);
+                }
+                helper.UpdateSave(pocketModals, FileSource.DROP_ROOT, name, KEY_POCKET_MODALS);
             }
-            helper.UpdateSave(pocketModals, FileSource.DROP_ROOT, name, KEY_POCKET_MODALS);
             // PocketAccountData
-            var pocketAccountIds = GetAllPocketAccounts();
-            var pocketAccounts = new PocketAccountsSave
+            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_POCKET_ACCOUNTS))
             {
-                accounts = new PocketAccountData[pocketAccountIds.Length]
-            };
-            for (int i = 0; i < pocketAccountIds.Length; ++i)
-            {
-                pocketAccounts.accounts[i] = GetPocketAccount(pocketAccountIds[i]);
+                var pocketAccountIds = GetAllPocketAccounts();
+                var pocketAccounts = new PocketAccountsSave
+                {
+                    accounts = new PocketAccountData[pocketAccountIds.Length]
+                };
+                for (int i = 0; i < pocketAccountIds.Length; ++i)
+                {
+                    pocketAccounts.accounts[i] = GetPocketAccount(pocketAccountIds[i]);
+                }
+                helper.UpdateSave(pocketAccounts, FileSource.DROP_ROOT, name, KEY_POCKET_ACCOUNTS);
             }
-            helper.UpdateSave(pocketAccounts, FileSource.DROP_ROOT, name, KEY_POCKET_ACCOUNTS);
             // BillTagData
-            var billTagIds = GetAllBillTags();
-            var billTags = new BillTagsSave
+            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_BILL_TAGS))
             {
-                tags = new BillTagData[billTagIds.Length]
-            };
-            for (int i = 0; i < billTagIds.Length; ++i)
-            {
-                billTags.tags[i] = GetBillTag(billTagIds[i]);
+                var billTagIds = GetAllBillTags();
+                var billTags = new BillTagsSave
+                {
+                    tags = new BillTagData[billTagIds.Length]
+                };
+                for (int i = 0; i < billTagIds.Length; ++i)
+                {
+                    billTags.tags[i] = GetBillTag(billTagIds[i]);
+                }
+                helper.UpdateSave(billTags, FileSource.DROP_ROOT, name, KEY_BILL_TAGS);
             }
-            helper.UpdateSave(billTags, FileSource.DROP_ROOT, name, KEY_BILL_TAGS);
             // BillData
-            var billIds = GetAllBills();
-            var bills = new BillsSave
+            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_BILLS))
             {
-                bills = new BillData[billIds.Length]
-            };
-            for (int i = 0; i < billIds.Length; ++i)
-            {
-                bills.bills[i] = GetBill(billIds[i]);
+                var billIds = GetAllBills();
+                var bills = new BillsSave
+                {
+                    bills = new BillData[billIds.Length]
+                };
+                for (int i = 0; i < billIds.Length; ++i)
+                {
+                    bills.bills[i] = GetBill(billIds[i]);
+                }
+                helper.UpdateSave(bills, FileSource.DROP_ROOT, name, KEY_BILLS);
             }
-            helper.UpdateSave(bills, FileSource.DROP_ROOT, name, KEY_BILLS);
         }
 
-        private readonly string name;
-        private IFamilyManager manager;
         private readonly JsonDataDicHelper helper = new JsonDataDicHelper();
 
         [System.Serializable]

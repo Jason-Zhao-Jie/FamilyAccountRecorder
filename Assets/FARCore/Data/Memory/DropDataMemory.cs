@@ -8,6 +8,12 @@ namespace FamilyAccountRecorder.Data.Memory
 {
     public class DropDataMemory : IDropData
     {
+        public DropDataMemory(SystemSettingDropData data)
+        {
+            DropData = data;
+        }
+
+        public virtual SystemSettingDropData DropData { get; private set; }
         public virtual DataSource DataSource => DataSource.Memory;
 
         public string Address { get; protected set; } = "";

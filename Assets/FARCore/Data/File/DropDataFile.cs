@@ -14,10 +14,15 @@ namespace FamilyAccountRecorder.Data.File
 
         public override DataSource DataSource => DataSource.File;
 
-        public DropDataFile()
+        public DropDataFile(SystemSettingDropData data) : base(data)
         {
             IOManager.MkdirIfNotExist(FileSource.DROP_ROOT);
             Settings = helper.UpdateLoad<DropSettingData>(FileSource.DROP_ROOT, KEY_FILE_NAME);
+            if (Settings.familyList == null || Settings.familyList.Length == 0)
+            {
+                Settings = new DropSettingData { name = data.name, familyList = new string[] { "赵杰的家庭" } };
+                helper.UpdateSave(Settings, FileSource.DROP_ROOT, KEY_FILE_NAME);
+            }
         }
 
         public override bool CreateFamily(string name)
@@ -25,7 +30,7 @@ namespace FamilyAccountRecorder.Data.File
             var ret = base.CreateFamily(name);
             if (ret)
             {
-                helper.UpdateSave<DropSettingData>(Settings, FileSource.DROP_ROOT, KEY_FILE_NAME);
+                helper.UpdateSave(Settings, FileSource.DROP_ROOT, KEY_FILE_NAME);
             }
             return ret;
         }

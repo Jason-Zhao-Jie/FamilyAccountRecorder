@@ -1,4 +1,6 @@
-﻿namespace FamilyAccountRecorder.Model.Interface
+﻿using FamilyAccountRecorder.Model.Structs;
+
+namespace FamilyAccountRecorder.Model.Interface
 {
     public enum DataSource : ushort
     {
@@ -12,9 +14,11 @@
     public interface IDropData
     {
         DataSource DataSource { get; }
+        SystemSettingDropData DropData { get; }
         string Address { get; }
         string Name { get; }
         string[] FamilyList { get; }
         bool CreateFamily(string name);
+        bool RemoveFamily(string name);
     }
 }

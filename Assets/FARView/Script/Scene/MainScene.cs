@@ -25,9 +25,9 @@ namespace FamilyAccountRecorder.View
         // Start is called before the first frame update
         private void Start()
         {
-            Center.EventMgr.Listen(Constants.Event.ShowPanel, OnEvent);
-            Center.EventMgr.Listen(Constants.Event.ClosePanel, OnEvent);
-            Center.Init();
+            ViewCenter.EventMgr.Listen(Constants.Event.ShowPanel, OnEvent);
+            ViewCenter.EventMgr.Listen(Constants.Event.ClosePanel, OnEvent);
+            ViewCenter.Init();
         }
 
         // Update is called once per frame

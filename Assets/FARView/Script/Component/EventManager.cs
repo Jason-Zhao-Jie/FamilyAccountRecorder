@@ -7,7 +7,7 @@ namespace FamilyAccountRecorder.View
         protected override void Awake()
         {
             base.Awake();
-            Center.EventMgr = this;
+            ViewCenter.EventMgr = this;
         }
     }
 }
