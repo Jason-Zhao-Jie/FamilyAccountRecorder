@@ -2690,6 +2690,10 @@ MonoBehaviour:
   text_startCash: {fileID: 9077542025548759859}
   text_startTime: {fileID: 7303982728564690127}
   text_targetAddress: {fileID: 5283705051894871649}
+  noFamilyForbidButtons:
+  - {fileID: 5612619031159714498}
+  - {fileID: 8760414035174858051}
+  - {fileID: 3177089694746297000}
 --- !u!1 &6293742535552136810
 GameObject:
   m_ObjectHideFlags: 0
