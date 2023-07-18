@@ -1,22 +1,22 @@
 using FamilyAccountRecorder.Model.Interface;
-using FamilyAccountRecorder.Present;
 using FamilyAccountRecorder.View.Constants;
 
 using System.Collections.Generic;
 
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace FamilyAccountRecorder.View.Prefab
 {
     public class FamilyManagePanel : AViewPanel
     {
-        public Dropdown dropdown_familySelect;
-        public Text text_name;
-        public Text text_owner;
-        public Text text_createTime;
-        public Text text_startCash;
-        public Text text_startTime;
-        public Text text_targetAddress;
+        [SerializeField] private Dropdown dropdown_familySelect;
+        [SerializeField] private Text text_name;
+        [SerializeField] private Text text_owner;
+        [SerializeField] private Text text_createTime;
+        [SerializeField] private Text text_startCash;
+        [SerializeField] private Text text_startTime;
+        [SerializeField] private Text text_targetAddress;
 
         protected void Awake()
         {
@@ -31,12 +31,24 @@ namespace FamilyAccountRecorder.View.Prefab
 
         protected void Start()
         {
-
+            OnSelectFamily();
         }
 
         protected void Update()
         {
 
+        }
+
+        public void OnSelectFamily()
+        {
+            var selected = dropdown_familySelect.itemText.text;
+            var data = CoreCenter.SelectFamily(selected);
+            text_name.text = data.FamilySetting.name;
+            text_owner.text = data.FamilySetting.owner;
+            text_createTime.text = new System.DateTime(data.FamilySetting.createTime).ToString();
+            text_startCash.text = (data.FamilySetting.initialCash / 100f).ToString();
+            text_startTime.text = new System.DateTime(data.FamilySetting.initialDateTime).ToString();
+            text_targetAddress.text = "local file";
         }
 
         public void OnClickRename()
@@ -56,7 +68,7 @@ namespace FamilyAccountRecorder.View.Prefab
 
         public void OnClickChangeTarget()
         {
-            ViewCenter.EventMgr.Notify(Event.ShowPanel, PanelType.DropSelect, PanelLayer.Popup);
+            ViewCenter.EventMgr.Notify(Constants.Event.ShowPanel, PanelType.DropSelect, PanelLayer.Popup);
         }
 
         public void OnClickSwitchTo()

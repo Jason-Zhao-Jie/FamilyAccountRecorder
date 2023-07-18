@@ -63,6 +63,11 @@ namespace FamilyAccountRecorder.Data.File
             helper.UpdateSave(data, KEY_FILE_NAME);
         }
 
+        public void SelectFamily(string name)
+        {
+            data.selectedFamilyName = name;
+        }
+
         private SystemSettingData data;
         private readonly JsonDataDicHelper helper = new JsonDataDicHelper();
     }

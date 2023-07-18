@@ -9,12 +9,9 @@ namespace FamilyAccountRecorder.View
     public class MainScene : MonoBehaviour
     {
 
-        [SerializeField]
-        public GameObject dropSelectPanel;
-        [SerializeField]
-        public GameObject familyManagerPanel;
-        [SerializeField]
-        public RectTransform[] panelRoots;
+        [SerializeField] private GameObject dropSelectPanel;
+        [SerializeField] private GameObject familyManagerPanel;
+        [SerializeField] private RectTransform[] panelRoots;
 
         private void Awake()
         {
