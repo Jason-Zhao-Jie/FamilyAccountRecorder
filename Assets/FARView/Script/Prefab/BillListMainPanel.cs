@@ -18,5 +18,9 @@ namespace FamilyAccountRecorder.View.Prefab
         {
 
         }
+
+        public override void Init(params object[] data)
+        {
+        }
     }
 }

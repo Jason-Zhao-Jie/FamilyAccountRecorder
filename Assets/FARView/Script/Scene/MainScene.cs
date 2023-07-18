@@ -11,12 +11,14 @@ namespace FamilyAccountRecorder.View
 
         [SerializeField] private GameObject dropSelectPanel;
         [SerializeField] private GameObject familyManagerPanel;
+        [SerializeField] private GameObject familySettingPanel;
         [SerializeField] private RectTransform[] panelRoots;
 
         private void Awake()
         {
             panelPrefabs.Add(PanelType.DropSelect, dropSelectPanel);
             panelPrefabs.Add(PanelType.FamilyManager, familyManagerPanel);
+            panelPrefabs.Add(PanelType.FamilySetting, familySettingPanel);
         }
 
         // Start is called before the first frame update
@@ -33,21 +35,22 @@ namespace FamilyAccountRecorder.View
 
         }
 
-        private void OnEvent(Constants.Event e, params ulong[] data)
+        private void OnEvent(Constants.Event e, ulong key, params object[] data)
         {
             switch (e)
             {
                 case Constants.Event.ShowPanel:
-                    OnEventShowPanel(data[0], data[1]);
+                    OnEventShowPanel(key, data);
                     break;
                 case Constants.Event.ClosePanel:
-                    OnEventClosePanel(data[0]);
+                    OnEventClosePanel(key);
                     break;
             }
         }
 
-        private void OnEventShowPanel(ulong type, ulong layer)
+        private void OnEventShowPanel(ulong type, params object[] data)
         {
+            ulong layer = (ulong)data[0];
             AViewPanel panel;
             if (openedPanels.ContainsKey(type))
             {
@@ -57,6 +60,7 @@ namespace FamilyAccountRecorder.View
             {
                 panel = Instantiate(panelPrefabs[type]).GetComponent<AViewPanel>();
                 openedPanels.Add(type, panel);
+                panel.Init(data);
             }
             panel.Open(layer, panelRoots[layer]);
         }

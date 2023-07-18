@@ -1,4 +1,5 @@
 using FamilyAccountRecorder.Model.Interface;
+using FamilyAccountRecorder.Model.Structs;
 using FamilyAccountRecorder.View.Constants;
 
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace FamilyAccountRecorder.View.Prefab
 
         protected void Awake()
         {
+            ViewCenter.EventMgr.Listen(Constants.Event.FamilyChanged, OnFamilyCreated);
+
             dropdown_familySelect.ClearOptions();
             var flist = new List<string>();
             foreach(var i in CoreCenter.FamilyList)
@@ -39,6 +42,10 @@ namespace FamilyAccountRecorder.View.Prefab
 
         }
 
+        public override void Init(params object[] data)
+        {
+        }
+
         public void OnSelectFamily()
         {
             var selected = dropdown_familySelect.itemText.text;
@@ -49,6 +56,11 @@ namespace FamilyAccountRecorder.View.Prefab
             text_startCash.text = (data.FamilySetting.initialCash / 100f).ToString();
             text_startTime.text = new System.DateTime(data.FamilySetting.initialDateTime).ToString();
             text_targetAddress.text = "local file";
+        }
+
+        public void OnCreateFamily()
+        {
+            ViewCenter.EventMgr.Notify(Constants.Event.ShowPanel, PanelType.FamilySetting, PanelLayer.Popup, new FamilySettingData());
         }
 
         public void OnClickRename()
@@ -82,6 +94,11 @@ namespace FamilyAccountRecorder.View.Prefab
         }
 
         public void OnClickCreate()
+        {
+
+        }
+
+        private void OnFamilyCreated(Constants.Event _event, ulong type, params object[] data)
         {
 
         }

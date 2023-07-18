@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FamilyAccountRecorder.View.Constants
+﻿namespace FamilyAccountRecorder.View.Constants
 {
     public enum Event : ulong
     {
         ShowPanel,
         ClosePanel,
+        FamilyChanged,
     }
 
     public static class PanelType
     {
         public static ulong DropSelect = 0;
         public static ulong FamilyManager = 1;
+        public static ulong FamilySetting = 2;
     }
 
     public static class PanelLayer
@@ -32,5 +28,12 @@ namespace FamilyAccountRecorder.View.Constants
     {
         public static ushort Local = 0;
         public static ushort Server = 1;
+    }
+
+    public static class FamilyChangeType
+    {
+        public static ushort Change = 0;
+        public static ushort Create = 1;
+        public static ushort Delete = 2;
     }
 }

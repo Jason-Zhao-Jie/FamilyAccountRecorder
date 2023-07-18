@@ -11,6 +11,9 @@ namespace FamilyAccountRecorder.Model.Interface
             gameObject.transform.localScale = Vector3.one;
             gameObject.SetActive(true);
         }
+
+        public abstract void Init(params object[] data);
+
         public void Close()
         {
             gameObject.SetActive(false);
