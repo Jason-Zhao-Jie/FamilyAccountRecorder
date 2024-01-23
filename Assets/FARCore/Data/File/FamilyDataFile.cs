@@ -1,5 +1,5 @@
-﻿using ArmyAnt.Manager;
-using ArmyAnt.Utility;
+﻿using ArmyAnt.Utility;
+using ArmyAnt.IO;
 
 using FamilyAccountRecorder.Data.Memory;
 using FamilyAccountRecorder.Model.Constants;
@@ -26,7 +26,7 @@ namespace FamilyAccountRecorder.Data.File
 
         public void UpdateLoad()
         {
-            IOManager.MkdirIfNotExist(FileSource.DROP_ROOT, name);
+            IOManager.Instance.MkdirIfNotExist(FileSource.DROP_ROOT, name);
             // FamilySettingData
             var familySetting = helper.UpdateLoad<FamilySettingData>(FileSource.DROP_ROOT, name, KEY_FAMILY_SETTING);
             FamilySetting = familySetting;
@@ -69,14 +69,14 @@ namespace FamilyAccountRecorder.Data.File
         }
         public void UpdateSave(bool onlyCheckFree = false)
         {
-            IOManager.MkdirIfNotExist(FileSource.DROP_ROOT, name);
+            IOManager.Instance.MkdirIfNotExist(FileSource.DROP_ROOT, name);
             // FamilySettingData
-            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_FAMILY_SETTING))
+            if (!onlyCheckFree || !IOManager.Instance.ExistFile(FileSource.DROP_ROOT, name, KEY_FAMILY_SETTING))
             {
                 helper.UpdateSave(FamilySetting, FileSource.DROP_ROOT, name, KEY_FAMILY_SETTING);
             }
             // FamilyMemberData
-            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_FAMILY_MEMBERS))
+            if (!onlyCheckFree || !IOManager.Instance.ExistFile(FileSource.DROP_ROOT, name, KEY_FAMILY_MEMBERS))
             {
                 var familyMemberIds = GetAllFamilyMembers();
                 var familyMembers = new FamilyMembersSave
@@ -90,7 +90,7 @@ namespace FamilyAccountRecorder.Data.File
                 helper.UpdateSave(familyMembers, FileSource.DROP_ROOT, name, KEY_FAMILY_MEMBERS);
             }
             // PocketTagData
-            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_POCKET_TAGS))
+            if (!onlyCheckFree || !IOManager.Instance.ExistFile(FileSource.DROP_ROOT, name, KEY_POCKET_TAGS))
             {
                 var pocketTagIds = GetAllPocketTags();
                 var pocketTags = new PocketTagsSave
@@ -104,7 +104,7 @@ namespace FamilyAccountRecorder.Data.File
                 helper.UpdateSave(pocketTags, FileSource.DROP_ROOT, name, KEY_POCKET_TAGS);
             }
             // PocketModalData
-            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_POCKET_MODALS))
+            if (!onlyCheckFree || !IOManager.Instance.ExistFile(FileSource.DROP_ROOT, name, KEY_POCKET_MODALS))
             {
                 var pocketModalIds = GetAllPocketModals();
                 var pocketModals = new PocketModalsSave
@@ -118,7 +118,7 @@ namespace FamilyAccountRecorder.Data.File
                 helper.UpdateSave(pocketModals, FileSource.DROP_ROOT, name, KEY_POCKET_MODALS);
             }
             // PocketAccountData
-            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_POCKET_ACCOUNTS))
+            if (!onlyCheckFree || !IOManager.Instance.ExistFile(FileSource.DROP_ROOT, name, KEY_POCKET_ACCOUNTS))
             {
                 var pocketAccountIds = GetAllPocketAccounts();
                 var pocketAccounts = new PocketAccountsSave
@@ -132,7 +132,7 @@ namespace FamilyAccountRecorder.Data.File
                 helper.UpdateSave(pocketAccounts, FileSource.DROP_ROOT, name, KEY_POCKET_ACCOUNTS);
             }
             // BillTagData
-            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_BILL_TAGS))
+            if (!onlyCheckFree || !IOManager.Instance.ExistFile(FileSource.DROP_ROOT, name, KEY_BILL_TAGS))
             {
                 var billTagIds = GetAllBillTags();
                 var billTags = new BillTagsSave
@@ -146,7 +146,7 @@ namespace FamilyAccountRecorder.Data.File
                 helper.UpdateSave(billTags, FileSource.DROP_ROOT, name, KEY_BILL_TAGS);
             }
             // BillData
-            if (!onlyCheckFree || !IOManager.ExistFile(FileSource.DROP_ROOT, name, KEY_BILLS))
+            if (!onlyCheckFree || !IOManager.Instance.ExistFile(FileSource.DROP_ROOT, name, KEY_BILLS))
             {
                 var billIds = GetAllBills();
                 var bills = new BillsSave

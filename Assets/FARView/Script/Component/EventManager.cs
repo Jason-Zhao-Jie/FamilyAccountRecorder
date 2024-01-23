@@ -2,11 +2,9 @@
 
 namespace FamilyAccountRecorder.View
 {
-    public class EventManager : EventPlayer<Constants.Event, ulong>
-    {
-        protected override void Awake()
+    public class EventManager : EventManager<Present.Event>, Present.IEventManager {
+        private void Awake()
         {
-            base.Awake();
             ViewCenter.EventMgr = this;
         }
     }

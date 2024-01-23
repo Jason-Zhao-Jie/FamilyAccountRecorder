@@ -3,6 +3,8 @@ using UnityEngine;
 using FamilyAccountRecorder.View.Constants;
 using System.Collections.Generic;
 using FamilyAccountRecorder.Model.Interface;
+using FamilyAccountRecorder.Present;
+using static FamilyAccountRecorder.Present.EventArgs_ShowPanel;
 
 namespace FamilyAccountRecorder.View
 {
@@ -24,8 +26,8 @@ namespace FamilyAccountRecorder.View
         // Start is called before the first frame update
         private void Start()
         {
-            ViewCenter.EventMgr.Listen(Constants.Event.ShowPanel, OnEvent);
-            ViewCenter.EventMgr.Listen(Constants.Event.ClosePanel, OnEvent);
+            ViewCenter.EventMgr.Listen(Present.Event.ShowPanel, OnEvent);
+            ViewCenter.EventMgr.Listen(Present.Event.ClosePanel, OnEvent);
             ViewCenter.Init();
         }
 
@@ -35,20 +37,24 @@ namespace FamilyAccountRecorder.View
 
         }
 
-        private void OnEvent(Constants.Event e, ulong key, params object[] data)
+        private void OnEvent(Present.IEventManager.IEventArgs arg)
         {
-            switch (e)
+            switch (arg.EventId)
             {
-                case Constants.Event.ShowPanel:
-                    OnEventShowPanel(key, data);
+                case Present.Event.ShowPanel:
+                    if(arg is EventArgs_ShowPanel sp_arg) {
+                        OnEventShowPanel(sp_arg.Type, sp_arg.Data);
+                    }
                     break;
-                case Constants.Event.ClosePanel:
-                    OnEventClosePanel(key);
+                case Present.Event.ClosePanel:
+                    if (arg is EventArgs_ClosePanel cp_arg) {
+                        OnEventClosePanel(cp_arg.Type);
+                    }
                     break;
             }
         }
 
-        private void OnEventShowPanel(ulong type, params object[] data)
+        private void OnEventShowPanel(PanelType type, params object[] data)
         {
             ulong layer = (ulong)data[0];
             AViewPanel panel;
@@ -65,7 +71,7 @@ namespace FamilyAccountRecorder.View
             panel.Open(layer, panelRoots[layer]);
         }
 
-        private void OnEventClosePanel(ulong type)
+        private void OnEventClosePanel(PanelType type)
         {
             if (openedPanels.ContainsKey(type))
             {
@@ -74,7 +80,7 @@ namespace FamilyAccountRecorder.View
             }
         }
 
-        private Dictionary<ulong, GameObject> panelPrefabs = new Dictionary<ulong, GameObject>();
-        private Dictionary<ulong, AViewPanel> openedPanels = new Dictionary<ulong, AViewPanel>();
+        private Dictionary<PanelType, GameObject> panelPrefabs = new Dictionary<PanelType, GameObject>();
+        private Dictionary<PanelType, AViewPanel> openedPanels = new Dictionary<PanelType, AViewPanel>();
     }
 }

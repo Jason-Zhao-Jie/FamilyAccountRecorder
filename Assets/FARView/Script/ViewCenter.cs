@@ -1,5 +1,6 @@
 ﻿using FamilyAccountRecorder.View;
-using FamilyAccountRecorder.View.Constants;
+
+using static FamilyAccountRecorder.Present.EventArgs_ShowPanel;
 
 namespace FamilyAccountRecorder
 {
@@ -10,7 +11,7 @@ namespace FamilyAccountRecorder
         public static void Init()
         {
             CoreCenter.Init();
-            EventMgr.Notify(Event.ShowPanel, PanelType.FamilyManager, PanelLayer.Panel);
+            EventMgr.NotifySync(new Present.EventArgs_ShowPanel(PanelType.FamilyManager, PanelLayer.Panel));
         }
     }
 }

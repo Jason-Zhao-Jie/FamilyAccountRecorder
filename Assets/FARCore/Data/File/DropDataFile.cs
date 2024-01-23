@@ -1,5 +1,5 @@
-﻿using ArmyAnt.Manager;
-using ArmyAnt.Utility;
+﻿using ArmyAnt.Utility;
+using ArmyAnt.IO;
 
 using FamilyAccountRecorder.Data.Memory;
 using FamilyAccountRecorder.Model.Constants;
@@ -16,7 +16,7 @@ namespace FamilyAccountRecorder.Data.File
 
         public DropDataFile(SystemSettingDropData data) : base(data)
         {
-            IOManager.MkdirIfNotExist(FileSource.DROP_ROOT);
+            IOManager.Instance.MkdirIfNotExist(FileSource.DROP_ROOT);
             Settings = helper.UpdateLoad<DropSettingData>(FileSource.DROP_ROOT, KEY_FILE_NAME);
             if (Settings.familyList == null || Settings.familyList.Length == 0)
             {

@@ -1,6 +1,8 @@
 [submodule "Assets/ArmyAnt.Net"]
 	path = Assets/ArmyAnt.Net
 	url = https://github.com/Army-Ant/ArmyAnt.Net.git
+	branch = master
 [submodule "Assets/ArmyAntUnity"]
 	path = Assets/ArmyAntUnity
 	url = https://github.com/Army-Ant/ArmyAntUnity.git
+	branch = main

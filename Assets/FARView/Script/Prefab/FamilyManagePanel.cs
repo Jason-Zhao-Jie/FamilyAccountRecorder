@@ -1,11 +1,14 @@
 using FamilyAccountRecorder.Model.Interface;
 using FamilyAccountRecorder.Model.Structs;
+using FamilyAccountRecorder.Present;
 using FamilyAccountRecorder.View.Constants;
 
 using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
+
+using static FamilyAccountRecorder.Present.EventArgs_ShowPanel;
 
 namespace FamilyAccountRecorder.View.Prefab
 {
@@ -23,7 +26,7 @@ namespace FamilyAccountRecorder.View.Prefab
 
         protected void Awake()
         {
-            ViewCenter.EventMgr.Listen(Constants.Event.FamilyChanged, OnFamilyCreated);
+            ViewCenter.EventMgr.Listen(Present.Event.FamilyChanged, OnFamilyCreated);
 
             dropdown_familySelect.ClearOptions();
             var flist = new List<string>();
@@ -83,7 +86,7 @@ namespace FamilyAccountRecorder.View.Prefab
 
         public void OnCreateFamily()
         {
-            ViewCenter.EventMgr.Notify(Constants.Event.ShowPanel, PanelType.FamilySetting, PanelLayer.Popup, new FamilySettingData());
+            ViewCenter.EventMgr.NotifySync(new EventArgs_ShowPanel(PanelType.FamilySetting, PanelLayer.Popup, new FamilySettingData()));
         }
 
         public void OnClickRename()
@@ -103,7 +106,7 @@ namespace FamilyAccountRecorder.View.Prefab
 
         public void OnClickChangeTarget()
         {
-            ViewCenter.EventMgr.Notify(Constants.Event.ShowPanel, PanelType.DropSelect, PanelLayer.Popup);
+            ViewCenter.EventMgr.NotifySync(new EventArgs_ShowPanel(PanelType.DropSelect, PanelLayer.Popup));
         }
 
         public void OnClickSwitchTo()
@@ -121,7 +124,7 @@ namespace FamilyAccountRecorder.View.Prefab
 
         }
 
-        private void OnFamilyCreated(Constants.Event _event, ulong type, params object[] data)
+        private void OnFamilyCreated(Present.IEventManager.IEventArgs arg)
         {
 
         }
