@@ -87,9 +87,9 @@ namespace FamilyAccountRecorder.View.Prefab {
         public override void Init(EventArgs_ShowPanel args) {
             if(args is EventArgs_ShowPanel_DialogPanel data) {
                 DialogData = data.Data;
-                OnLeftClick += data.LeftButtonCallback;
-                OnMidClick += data.MidButtonCallback;
-                OnRightClick += data.RightButtonCallback;
+                OnLeftClick = data.LeftButtonCallback;
+                OnMidClick = data.MidButtonCallback;
+                OnRightClick = data.RightButtonCallback;
             }
         }
 

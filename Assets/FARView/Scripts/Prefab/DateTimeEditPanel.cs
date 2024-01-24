@@ -36,8 +36,11 @@ namespace FamilyAccountRecorder.View.Prefab
         public DateTimeEditPanel() : base(IViewPanel.PanelType.DateTimeEdit) {}
 
         public override void Init(EventArgs_ShowPanel args) {
-            if(args is EventArgs_ShowPanel<DateTime> timeArgs) {
-                Value = timeArgs.Data;
+            if(args is EventArgs_ShowPanelWithResult<DateTime> commitArgs) {
+                Value = commitArgs.Data;
+                OnCommit = commitArgs.OnCommit;
+            }else if(args is EventArgs_ShowPanel<DateTime> dataArgs) {
+                Value = dataArgs.Data;
             }
         }
 

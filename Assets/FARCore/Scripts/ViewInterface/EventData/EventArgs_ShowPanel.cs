@@ -18,4 +18,9 @@ namespace FamilyAccountRecorder.ViewInterface {
         public EventArgs_ShowPanel(IViewPanel.PanelType type, IViewPanel.PanelLayer layer) : base(type, layer) { }
     }
 
+    public class EventArgs_ShowPanelWithResult<T> : EventArgs_ShowPanel<T> {
+        public Action<T> OnCommit { get; set; }
+        public EventArgs_ShowPanelWithResult(IViewPanel.PanelType type, IViewPanel.PanelLayer layer) : base(type, layer) { }
+    }
+
 }

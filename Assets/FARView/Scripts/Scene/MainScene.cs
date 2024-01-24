@@ -7,7 +7,6 @@ using ArmyAnt.ViewUtil.Components;
 namespace FamilyAccountRecorder.View
 {
     public sealed class MainScene : EventManager<ViewInterface.Event>, IEventManager, IViewCenter {
-
         [SerializeField] private GameObject dialogPanel;
         [SerializeField] private GameObject dataTimeEditPanel;
         [SerializeField] private GameObject systemSettingPanel;
@@ -20,7 +19,6 @@ namespace FamilyAccountRecorder.View
         [SerializeField] private RectTransform[] panelRoots;
 
         private void Awake() {
-            ProcessMain.Init(this, this);
             panelPrefabs.Add(IViewPanel.PanelType.Dialog, dialogPanel);
             panelPrefabs.Add(IViewPanel.PanelType.DateTimeEdit, dataTimeEditPanel);
             panelPrefabs.Add(IViewPanel.PanelType.SystemSetting, systemSettingPanel);
@@ -30,6 +28,8 @@ namespace FamilyAccountRecorder.View
             panelPrefabs.Add(IViewPanel.PanelType.MemberManage, memberManagePanel);
             panelPrefabs.Add(IViewPanel.PanelType.TagManage, tagManage);
             panelPrefabs.Add(IViewPanel.PanelType.BillListMain, billListMain);
+
+            ProcessMain.Init(this, this);
         }
 
         // Start is called before the first frame update
