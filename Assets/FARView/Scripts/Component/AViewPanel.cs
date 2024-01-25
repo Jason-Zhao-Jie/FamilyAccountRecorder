@@ -26,5 +26,9 @@ namespace FamilyAccountRecorder.Model.Interface
         {
             gameObject.SetActive(false);
         }
+
+        protected void CloseSelf() {
+            ProcessMain.EventMgr.NotifySync(new EventArgs_ClosePanel(Type));
+        }
     }
 }

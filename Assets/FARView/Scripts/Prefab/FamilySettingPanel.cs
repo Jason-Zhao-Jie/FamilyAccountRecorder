@@ -1,80 +1,66 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using FamilyAccountRecorder.Model.Interface;
+﻿using FamilyAccountRecorder.Model.Interface;
 using FamilyAccountRecorder.Model.Structs;
 using FamilyAccountRecorder.ViewInterface;
+using FamilyAccountRecorder.ViewInterface.Panels;
 
-namespace FamilyAccountRecorder.View.Prefab
-{
-	public class FamilySettingPanel : AViewPanel
-    {
+using System;
+
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace FamilyAccountRecorder.View.Prefab {
+    public class FamilySettingPanel : AViewPanel, IFamilySettingPanel {
         [SerializeField] private InputField input_familyName;
         [SerializeField] private Dropdown dropdown_familyOwner;
         [SerializeField] private Text text_createTime;
         [SerializeField] private InputField input_startCash;
-        [SerializeField] private InputField input_startTime;
-        [SerializeField] private Text text_targetAddress;
+        [SerializeField] private Text text_startTime;
 
-        public FamilySettingPanel() : base(IViewPanel.PanelType.FamilySetting) {
+        public event Action<FamilySettingData> OnCommit;
+
+        private FamilySettingData data;
+        public FamilySettingData Data {
+            get => data;
+            set {
+                data = value;
+                OnRefreshRevert();
+            }
         }
+
+        public FamilySettingPanel() : base(IViewPanel.PanelType.FamilySetting) { }
 
         // Use this for initialization
-        void Start()
-		{
-			inited = true;
-            DoInitShow();
+        void Awake() {
+            OnRefreshRevert();
         }
 
-        public override void Init(EventArgs_ShowPanel args)
-        {
-			SetHandle((args as EventArgs_ShowPanel<FamilySettingData>).Data);
+        public override void Init(EventArgs_ShowPanel args) {
+            Data = (args as EventArgs_ShowPanel<FamilySettingData>).Data;
         }
 
-        public void SetHandle(FamilySettingData data)
-		{
-			initData = data;
-			DoInitShow();
-		}
-
-		public void DoInitShow()
-		{
-			if(inited && initData != null)
-			{
-                OnAllRevert();
-			}
-		}
-
-        public void OnNameRevert()
-        {
-            input_familyName.text = initData.Value.name;
+        public void OnClickApply() {
+            data.name = input_familyName.text;
+            data.owner = dropdown_familyOwner.itemText.text;
+            data.initialCash = long.Parse(input_startCash.text);
+            data.initialDateTime = long.Parse(text_startTime.text);
         }
 
-        public void OnOwnerRevert()
-        {
-            dropdown_familyOwner.itemText.text = initData.Value.name;
+        public void OnRefreshRevert() {
+            input_familyName.text = data.name;
+            dropdown_familyOwner.itemText.text = data.owner;
+            text_createTime.text = new DateTime(data.createTime).ToString();
+            input_startCash.text = data.initialCash.ToString();
+            text_startTime.text = new DateTime(data.initialDateTime).ToString();
+            CloseSelf();
+            OnCommit(data);
         }
 
-        public void OnStartCashRevert()
-        {
-            input_startCash.text = initData.Value.initialCash.ToString();
+        public void OnChangeStartTime() {
+            ProcessMain.EventMgr.NotifySync(new EventArgs_ShowPanelWithResult<DateTime>(IViewPanel.PanelType.DateTimeEdit, IViewPanel.PanelLayer.Popup) { Data = new DateTime(data.initialDateTime), OnCommit = OnStartTimeChange });
         }
 
-        public void OnStartTimeRevert()
-        {
-            input_startTime.text = new System.DateTime(initData.Value.initialDateTime).ToString();
+        private void OnStartTimeChange(DateTime value) {
+            text_startTime.text = value.Ticks.ToString();
         }
-
-        public void OnAllRevert()
-        {
-            OnNameRevert();
-            OnOwnerRevert();
-            text_createTime.text = new System.DateTime(initData.Value.createTime).ToString();
-            OnStartCashRevert();
-            OnStartTimeRevert();
-            text_targetAddress.text = "local file";
-        }
-
-		private bool inited = false;
-		private FamilySettingData? initData = null;
     }
 }

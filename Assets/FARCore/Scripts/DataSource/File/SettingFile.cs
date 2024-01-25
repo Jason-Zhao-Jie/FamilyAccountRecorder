@@ -63,8 +63,7 @@ namespace FamilyAccountRecorder.DataSource.File
             helper.UpdateSave(data, KEY_FILE_NAME);
         }
 
-        public void SelectFamily(string name)
-        {
+        public void SelectFamily(string name) {
             data.selectedFamilyName = name;
         }
 

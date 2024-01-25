@@ -95,19 +95,19 @@ namespace FamilyAccountRecorder.View.Prefab {
 
         public void OnClickLeft() {
             if (OnLeftClick != null && OnLeftClick()) {
-                ProcessMain.EventMgr.NotifySync(new EventArgs_ClosePanel(Type));
+                CloseSelf();
             }
         }
 
         public void OnClickMid() {
             if (OnMidClick != null && OnMidClick()) {
-                ProcessMain.EventMgr.NotifySync(new EventArgs_ClosePanel(Type));
+                CloseSelf();
             }
         }
 
         public void OnClickRight() {
             if (OnRightClick != null && OnRightClick()) {
-                ProcessMain.EventMgr.NotifySync(new EventArgs_ClosePanel(Type));
+                CloseSelf();
             }
         }
     }

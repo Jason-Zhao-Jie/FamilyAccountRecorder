@@ -11,11 +11,12 @@ namespace FamilyAccountRecorder.View
         [SerializeField] private GameObject dataTimeEditPanel;
         [SerializeField] private GameObject systemSettingPanel;
         [SerializeField] private GameObject dropSelectPanel;
-        [SerializeField] private GameObject familyManagerPanel;
+        [SerializeField] private GameObject familySelectPanel;
         [SerializeField] private GameObject familySettingPanel;
         [SerializeField] private GameObject memberManagePanel;
         [SerializeField] private GameObject tagManage;
         [SerializeField] private GameObject billListMain;
+
         [SerializeField] private RectTransform[] panelRoots;
 
         private void Awake() {
@@ -23,7 +24,7 @@ namespace FamilyAccountRecorder.View
             panelPrefabs.Add(IViewPanel.PanelType.DateTimeEdit, dataTimeEditPanel);
             panelPrefabs.Add(IViewPanel.PanelType.SystemSetting, systemSettingPanel);
             panelPrefabs.Add(IViewPanel.PanelType.DropSelect, dropSelectPanel);
-            panelPrefabs.Add(IViewPanel.PanelType.FamilyManage, familyManagerPanel);
+            panelPrefabs.Add(IViewPanel.PanelType.FamilySelect, familySelectPanel);
             panelPrefabs.Add(IViewPanel.PanelType.FamilySetting, familySettingPanel);
             panelPrefabs.Add(IViewPanel.PanelType.MemberManage, memberManagePanel);
             panelPrefabs.Add(IViewPanel.PanelType.TagManage, tagManage);
@@ -66,7 +67,7 @@ namespace FamilyAccountRecorder.View
             return false;
         }
 
-        private readonly Dictionary<IViewPanel.PanelType, GameObject> panelPrefabs = new Dictionary<IViewPanel.PanelType, GameObject>();
-        private readonly Dictionary<IViewPanel.PanelType, AViewPanel> openedPanels = new Dictionary<IViewPanel.PanelType, AViewPanel>();
+        private readonly Dictionary<IViewPanel.PanelType, GameObject> panelPrefabs = new();
+        private readonly Dictionary<IViewPanel.PanelType, AViewPanel> openedPanels = new();
     }
 }

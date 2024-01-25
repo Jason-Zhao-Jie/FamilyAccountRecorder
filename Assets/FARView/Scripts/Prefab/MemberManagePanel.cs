@@ -1,30 +1,20 @@
 using FamilyAccountRecorder.Model.Interface;
 using FamilyAccountRecorder.ViewInterface;
+using FamilyAccountRecorder.ViewInterface.Panels;
 
-namespace FamilyAccountRecorder.View.Prefab
-{
-    public class MemberManagePanel : AViewPanel
-    {
-        public MemberManagePanel() : base(IViewPanel.PanelType.MemberManage) {
+namespace FamilyAccountRecorder.View.Prefab {
+    public class MemberManagePanel : AViewPanel, IMemberManagePanel {
+        private string family;
+        public string Family {
+            get => family;
+            set {
+                family = value;
+            }
         }
 
-        protected void Awake()
-        {
+        public MemberManagePanel() : base(IViewPanel.PanelType.MemberManage) { }
 
-        }
-
-        protected void Start()
-        {
-
-        }
-
-        protected void Update()
-        {
-
-        }
-
-        public override void Init(EventArgs_ShowPanel args)
-        {
+        public override void Init(EventArgs_ShowPanel args) {
         }
     }
 }

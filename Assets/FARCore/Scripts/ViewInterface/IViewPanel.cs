@@ -6,7 +6,6 @@
             SystemSetting,
             DropSelect,
             FamilySelect,
-            FamilyManage,
             FamilySetting,
             MemberManage,
             TagManage,

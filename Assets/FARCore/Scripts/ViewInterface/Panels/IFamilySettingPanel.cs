@@ -1,6 +1,6 @@
 namespace FamilyAccountRecorder.ViewInterface.Panels {
     public interface IFamilySettingPanel : IViewPanel {
-        string Name { get; set; }
-        Model.Structs.FamilySettingData Setting { get; }
+        Model.Structs.FamilySettingData Data { get; set; }
+        event System.Action<Model.Structs.FamilySettingData> OnCommit;
     }
 }

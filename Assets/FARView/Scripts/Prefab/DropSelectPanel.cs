@@ -13,8 +13,8 @@ namespace FamilyAccountRecorder.View.Prefab {
 
         private bool inited = false;
         private string selectedName;
-        public string Name { 
-            get => selectedName; 
+        public string Name {
+            get => selectedName;
             set {
                 selectedName = value;
                 if(inited) {
@@ -43,12 +43,13 @@ namespace FamilyAccountRecorder.View.Prefab {
         }
 
         public void OnClickOK() {
-            ProcessMain.EventMgr.NotifySync(new EventArgs_ClosePanel(Type));
+            CloseSelf();
+            Name = typeList.itemText.text;
             OnCommit(Name);
         }
 
         public void OnClickCancel() {
-            ProcessMain.EventMgr.NotifySync(new EventArgs_ClosePanel(Type));
+            CloseSelf();
         }
 
         private void Awake() {

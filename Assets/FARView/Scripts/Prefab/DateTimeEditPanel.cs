@@ -53,7 +53,7 @@ namespace FamilyAccountRecorder.View.Prefab
             var second = int.Parse(textSecond.text);
             Value = new DateTime(year, month, day, hour, minute, second);
             OnCommit(Value);
-            ProcessMain.EventMgr.NotifySync(new EventArgs_ClosePanel(Type));
+            CloseSelf();
         }
 
         public void OnClickReset() {
@@ -61,7 +61,7 @@ namespace FamilyAccountRecorder.View.Prefab
         }
 
         public void OnClickCancel() {
-            ProcessMain.EventMgr.NotifySync(new EventArgs_ClosePanel(Type));
+            CloseSelf();
         }
 
         public void OnYearChange(int delta) {

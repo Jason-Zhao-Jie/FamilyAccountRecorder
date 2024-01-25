@@ -272,8 +272,8 @@ MonoBehaviour:
   dataTimeEditPanel: {fileID: 6012257275969590935, guid: 6cf8883d04d41b24ab9fa730c8bcdabf, type: 3}
   systemSettingPanel: {fileID: 6012257275969590935, guid: 568ddfadfa31a7440be42acac00feb34, type: 3}
   dropSelectPanel: {fileID: 6012257275969590935, guid: 7639a92130510da4bbd70a30705528f5, type: 3}
-  familyManagerPanel: {fileID: 6012257275969590935, guid: d9a8d7647f1271a48b5a064c32bca109, type: 3}
-  familySettingPanel: {fileID: 8691284294397290725, guid: bfb6be033d7ff49018356794a3068251, type: 3}
+  familySelectPanel: {fileID: 8691284294397290725, guid: 354024bff2c4ca14d9441465b24e9726, type: 3}
+  familySettingPanel: {fileID: 6012257275969590935, guid: d9a8d7647f1271a48b5a064c32bca109, type: 3}
   memberManagePanel: {fileID: 6012257275969590935, guid: d8f65e317fdb8a2489ed8f001e79e0d3, type: 3}
   tagManage: {fileID: 6012257275969590935, guid: 2f0f1a11f6f4b1c43921acc1af842293, type: 3}
   billListMain: {fileID: 8978468465526886520, guid: c3bee3fa8d5cc82409ba9f834929c5dc, type: 3}
